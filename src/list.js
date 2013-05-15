@@ -206,25 +206,15 @@ var List = function(id, options, values) {
 		*/
 		this.remove = function(valueName, value, options) {
 				var found = 0;
-				var data;
 				for (var i = 0, il = self.items.length; i < il; i++) {
 						if (self.items[i].values()[valueName] == value) {
-							if(options.data){
-								data = self.items[i].values()[options.data]; 
-							}else{
-								found++;
-							}
-								templater.remove(self.items[i], options);
-								self.items.splice(i,1);
-								il--;
-								
+							found = (options.data)? self.items[i].values()[options.data] : found++;
+							templater.remove(self.items[i], options);
+							self.items.splice(i,1);
+							il--;
 						}
 				}
-				
 				self.update();
-				if(options.data){
-					return data;
-				}
 				return found;
 		};
 
